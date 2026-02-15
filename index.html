@@ -29,6 +29,7 @@ body {
   box-shadow: 0 30px 60px rgba(0,0,0,.35);
   cursor: pointer;
   animation: aparecerSobre 1.4s ease forwards;
+  z-index: 10;
 }
 
 @keyframes aparecerSobre {
@@ -72,35 +73,28 @@ body {
 }
 
 @keyframes salidaCarta {
-  0% {
-    opacity: 0;
-    transform: translateY(60px) scale(.85);
-  }
-  70% {
-    opacity: 1;
-    transform: translateY(-10px) scale(1.04);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  0% { opacity: 0; transform: translateY(60px) scale(.85); }
+  70% { opacity: 1; transform: translateY(-10px) scale(1.04); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ===== TARJETA ===== */
+/* ===== TARJETA (SIN FONDO) ===== */
 .tarjeta {
-  background: white;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
   width: 90%;
   max-width: 270px;
   padding: 18px;
   border-radius: 22px;
   text-align: center;
-  box-shadow: 0 20px 45px rgba(0,0,0,.3);
+  box-shadow: 0 20px 45px rgba(0,0,0,.25);
 }
 
 .tarjeta img {
   width: 100%;
   border-radius: 18px;
   margin-bottom: 10px;
+  background: transparent;
 }
 
 h1 {
@@ -234,7 +228,7 @@ setInterval(() => {
 /* 🧸 hello kitty & stitch */
 setInterval(() => {
   const k = document.createElement("img");
-  k.src = Math.random() > 0.5 ? "hello.png" : "Stitch.png";
+  k.src = Math.random() > 0.5 ? "hello.png" : "stitch.png"; // 👈 CORREGIDO
   k.className = "flotante";
   k.style.left = Math.random() * 100 + "vw";
   k.style.width = (40 + Math.random() * 35) + "px";
@@ -245,4 +239,3 @@ setInterval(() => {
 
 </body>
 </html>
-
