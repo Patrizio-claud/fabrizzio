@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💌 Una Carta Para Ti 💌</title>
+<title>💌 Para Mi Persona Favorita 💌</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -28,8 +28,6 @@ body {
   border-radius: 16px;
   box-shadow: 0 30px 60px rgba(0,0,0,.35);
   cursor: pointer;
-  z-index: 10;
-  pointer-events: auto;
   animation: aparecerSobre 1.6s ease forwards;
 }
 
@@ -51,7 +49,6 @@ body {
   transform-origin: top;
   transition: transform 1.2s ease;
   z-index: 2;
-  pointer-events: none;
 }
 
 .sobre.abierto .solapa {
@@ -69,14 +66,12 @@ body {
   transform: translateY(70px) scale(.8);
   filter: blur(10px);
   z-index: 3;
-  pointer-events: none;
 }
 
 .sobre.abierto .carta {
   animation: salidaCarta 1.8s cubic-bezier(.22,.8,.22,1) forwards;
 }
 
-/* ANIMACIÓN ESTABLE */
 @keyframes salidaCarta {
   0% {
     opacity: 0;
@@ -121,7 +116,7 @@ h1 {
 p {
   font-size: 15px;
   color: #555;
-  min-height: 52px;
+  min-height: 60px;
 }
 
 /* ===== BOTÓN ===== */
@@ -134,6 +129,7 @@ button {
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
 }
 
 /* ===== MENSAJE FINAL ===== */
@@ -153,6 +149,12 @@ button {
   border-radius: 24px;
   font-size: 19px;
   text-align: center;
+  animation: zoomMensaje .6s ease;
+}
+
+@keyframes zoomMensaje {
+  from { transform: scale(.7); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
 }
 
 /* ===== FLOTANTES ===== */
@@ -165,18 +167,8 @@ button {
 
 @keyframes flotar {
   to {
-    transform: translateY(-140vh) rotate(12deg);
+    transform: translateY(-140vh) rotate(25deg);
     opacity: 0;
-  }
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 480px) {
-  .sobre { width: 290px; height: 195px; }
-  .solapa {
-    border-left: 145px solid transparent;
-    border-right: 145px solid transparent;
-    border-top: 100px solid #ec95a6;
   }
 }
 </style>
@@ -184,7 +176,7 @@ button {
 
 <body>
 
-<div class="sobre" id="sobre">
+<div class="sobre" onclick="abrirSobre()">
   <div class="solapa"></div>
 
   <div class="carta">
@@ -198,18 +190,22 @@ button {
 </div>
 
 <script>
-let texto = "Desde el primer momento supe que eras especial para mí...";
+const texto = `Espero que este día esté siendo muy bonito para ti,
+uno que guardemos como recuerdo eterno,
+porque tú haces especiales todos mis días.
+
+Te amo mi gordita 💖
+Atte. Tu Mochi.`;
+
 let i = 0;
 let iniciado = false;
 
-const sobre = document.getElementById("sobre");
-
-sobre.addEventListener("click", () => {
+function abrirSobre() {
   if (iniciado) return;
   iniciado = true;
-  sobre.classList.add("abierto");
+  document.querySelector(".sobre").classList.add("abierto");
   escribirTexto();
-});
+}
 
 function escribirTexto() {
   if (i < texto.length) {
@@ -233,7 +229,7 @@ function mostrarMensaje(e) {
   m.onclick = () => m.remove();
 }
 
-/* CORAZONES */
+/* ===== FLOTANTES ===== */
 setInterval(() => {
   const f = document.createElement("div");
   f.className = "flotante";
@@ -244,7 +240,6 @@ setInterval(() => {
   setTimeout(() => f.remove(), 9000);
 }, 160);
 
-/* HELLO KITTY + STITCH */
 setInterval(() => {
   const k = document.createElement("img");
   k.src = Math.random() > 0.5 ? "hello.png" : "stitch.png";
@@ -258,3 +253,4 @@ setInterval(() => {
 
 </body>
 </html>
+
