@@ -78,9 +78,9 @@ body {
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ===== TARJETA (SIN FONDO) ===== */
+/* ===== TARJETA ===== */
 .tarjeta {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.88);
   backdrop-filter: blur(6px);
   width: 90%;
   max-width: 270px;
@@ -94,7 +94,6 @@ body {
   width: 100%;
   border-radius: 18px;
   margin-bottom: 10px;
-  background: transparent;
 }
 
 h1 {
@@ -106,11 +105,12 @@ h1 {
 p {
   font-size: 15px;
   color: #555;
-  min-height: 52px;
+  min-height: 60px;
+  white-space: pre-line;
 }
 
-/* ===== BOTÓN ===== */
 button {
+  display: none;
   margin-top: 12px;
   background: linear-gradient(135deg, #ff5c8a, #ff3366);
   color: white;
@@ -170,7 +170,7 @@ button {
 
   <div class="carta">
     <div class="tarjeta">
-      <img src="foto.jpg">
+      <img src="foto.jpg" alt="imagen especial">
       <h1>Hola mi amor 💖</h1>
       <p id="texto"></p>
       <button id="btn">Descúbrelo 💌</button>
@@ -180,27 +180,37 @@ button {
 
 <script>
 const texto =
-"Espero que este día esté siendo muy bonito para ti, y que cada recuerdo nuestro quede guardado en el libro de nuestro amor. Te amo mi gordita. 💕\n\nAtte. Tu Mochi.";
+"Espero que este día esté siendo muy bonito para ti,\n" +
+"y que cada recuerdo nuestro quede guardado\n" +
+"en el libro de nuestro amor.\n\n" +
+"Te amo mi gordita. 💕\n\n" +
+"Atte. Tu Mochi.";
 
 let i = 0;
 let abierto = false;
 
-document.getElementById("sobre").addEventListener("click", () => {
+const sobre = document.getElementById("sobre");
+const textoEl = document.getElementById("texto");
+const btn = document.getElementById("btn");
+
+sobre.addEventListener("click", () => {
   if (abierto) return;
   abierto = true;
-  document.getElementById("sobre").classList.add("abierto");
+  sobre.classList.add("abierto");
   escribir();
 });
 
 function escribir() {
   if (i < texto.length) {
-    document.getElementById("texto").innerHTML += texto.charAt(i);
+    textoEl.innerHTML += texto.charAt(i);
     i++;
     setTimeout(escribir, 55);
+  } else {
+    btn.style.display = "inline-block";
   }
 }
 
-document.getElementById("btn").addEventListener("click", e => {
+btn.addEventListener("click", e => {
   e.stopPropagation();
   const m = document.createElement("div");
   m.className = "mensaje";
@@ -223,17 +233,17 @@ setInterval(() => {
   f.style.fontSize = (16 + Math.random() * 28) + "px";
   document.body.appendChild(f);
   setTimeout(() => f.remove(), 9000);
-}, 180);
+}, 220);
 
 /* 🧸 hello kitty & stitch */
 setInterval(() => {
-  const k = document.createElement("img");
-  k.src = Math.random() > 0.5 ? "hello.png" : "stitch.png"; // 👈 CORREGIDO
-  k.className = "flotante";
-  k.style.left = Math.random() * 100 + "vw";
-  k.style.width = (40 + Math.random() * 35) + "px";
-  document.body.appendChild(k);
-  setTimeout(() => k.remove(), 9000);
+  const img = document.createElement("img");
+  img.src = Math.random() > 0.5 ? "hello.png" : "stitch.png";
+  img.className = "flotante";
+  img.style.left = Math.random() * 100 + "vw";
+  img.style.width = (40 + Math.random() * 35) + "px";
+  document.body.appendChild(img);
+  setTimeout(() => img.remove(), 9000);
 }, 2000);
 </script>
 
