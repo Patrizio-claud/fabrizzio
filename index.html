@@ -28,12 +28,12 @@ body {
   border-radius: 16px;
   box-shadow: 0 30px 60px rgba(0,0,0,.35);
   cursor: pointer;
-  animation: aparecerSobre 1.6s ease forwards;
+  animation: aparecerSobre 1.4s ease forwards;
 }
 
 @keyframes aparecerSobre {
-  from { transform: translateY(50px) scale(.9); opacity: 0; }
-  to   { transform: translateY(0) scale(1); opacity: 1; }
+  from { transform: translateY(40px) scale(.9); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
 /* ===== SOLAPA ===== */
@@ -47,7 +47,7 @@ body {
   border-right: 160px solid transparent;
   border-top: 110px solid #ec95a6;
   transform-origin: top;
-  transition: transform 1.2s ease;
+  transition: transform 1.1s ease;
   z-index: 2;
 }
 
@@ -63,30 +63,26 @@ body {
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transform: translateY(70px) scale(.8);
-  filter: blur(10px);
+  transform: translateY(60px) scale(.85);
   z-index: 3;
 }
 
 .sobre.abierto .carta {
-  animation: salidaCarta 1.8s cubic-bezier(.22,.8,.22,1) forwards;
+  animation: salidaCarta 1.6s ease forwards;
 }
 
 @keyframes salidaCarta {
   0% {
     opacity: 0;
-    transform: translateY(70px) scale(.8);
-    filter: blur(10px);
+    transform: translateY(60px) scale(.85);
   }
   70% {
     opacity: 1;
-    transform: translateY(-10px) scale(1.03);
-    filter: blur(0);
+    transform: translateY(-10px) scale(1.04);
   }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
@@ -116,7 +112,7 @@ h1 {
 p {
   font-size: 15px;
   color: #555;
-  min-height: 60px;
+  min-height: 52px;
 }
 
 /* ===== BOTÓN ===== */
@@ -129,10 +125,9 @@ button {
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,.25);
 }
 
-/* ===== MENSAJE FINAL ===== */
+/* ===== MENSAJE ===== */
 .mensaje {
   position: fixed;
   inset: 0;
@@ -149,12 +144,12 @@ button {
   border-radius: 24px;
   font-size: 19px;
   text-align: center;
-  animation: zoomMensaje .6s ease;
+  animation: zoom .5s ease;
 }
 
-@keyframes zoomMensaje {
+@keyframes zoom {
   from { transform: scale(.7); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 /* ===== FLOTANTES ===== */
@@ -167,7 +162,7 @@ button {
 
 @keyframes flotar {
   to {
-    transform: translateY(-140vh) rotate(25deg);
+    transform: translateY(-140vh) rotate(12deg);
     opacity: 0;
   }
 }
@@ -176,7 +171,7 @@ button {
 
 <body>
 
-<div class="sobre" onclick="abrirSobre()">
+<div class="sobre" id="sobre">
   <div class="solapa"></div>
 
   <div class="carta">
@@ -184,38 +179,34 @@ button {
       <img src="foto.jpg">
       <h1>Hola mi amor 💖</h1>
       <p id="texto"></p>
-      <button onclick="mostrarMensaje(event)">Descúbrelo 💌</button>
+      <button id="btn">Descúbrelo 💌</button>
     </div>
   </div>
 </div>
 
 <script>
-const texto = `Espero que este día esté siendo muy bonito para ti,
-uno que guardemos como recuerdo eterno,
-porque tú haces especiales todos mis días.
-
-Te amo mi gordita 💖
-Atte. Tu Mochi.`;
+const texto =
+"Espero que este día esté siendo muy bonito para ti, y que cada recuerdo nuestro quede guardado en el libro de nuestro amor. Te amo mi gordita. 💕\n\nAtte. Tu Mochi.";
 
 let i = 0;
-let iniciado = false;
+let abierto = false;
 
-function abrirSobre() {
-  if (iniciado) return;
-  iniciado = true;
-  document.querySelector(".sobre").classList.add("abierto");
-  escribirTexto();
-}
+document.getElementById("sobre").addEventListener("click", () => {
+  if (abierto) return;
+  abierto = true;
+  document.getElementById("sobre").classList.add("abierto");
+  escribir();
+});
 
-function escribirTexto() {
+function escribir() {
   if (i < texto.length) {
     document.getElementById("texto").innerHTML += texto.charAt(i);
     i++;
-    setTimeout(escribirTexto, 55);
+    setTimeout(escribir, 55);
   }
 }
 
-function mostrarMensaje(e) {
+document.getElementById("btn").addEventListener("click", e => {
   e.stopPropagation();
   const m = document.createElement("div");
   m.className = "mensaje";
@@ -227,9 +218,9 @@ function mostrarMensaje(e) {
     </div>`;
   document.body.appendChild(m);
   m.onclick = () => m.remove();
-}
+});
 
-/* ===== FLOTANTES ===== */
+/* 💖 corazones */
 setInterval(() => {
   const f = document.createElement("div");
   f.className = "flotante";
@@ -238,8 +229,9 @@ setInterval(() => {
   f.style.fontSize = (16 + Math.random() * 28) + "px";
   document.body.appendChild(f);
   setTimeout(() => f.remove(), 9000);
-}, 160);
+}, 180);
 
+/* 🧸 hello kitty & stitch */
 setInterval(() => {
   const k = document.createElement("img");
   k.src = Math.random() > 0.5 ? "hello.png" : "stitch.png";
@@ -248,9 +240,8 @@ setInterval(() => {
   k.style.width = (40 + Math.random() * 35) + "px";
   document.body.appendChild(k);
   setTimeout(() => k.remove(), 9000);
-}, 1800);
+}, 2000);
 </script>
 
 </body>
 </html>
-
