@@ -6,10 +6,8 @@
 <title>💌 Una Carta Para Ti 💌</title>
 
 <style>
-/* ===== RESET & FONDO ===== */
-* {
-  box-sizing: border-box;
-}
+/* ===== RESET ===== */
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -31,14 +29,12 @@ body {
   border-radius: 16px;
   box-shadow: 0 30px 60px rgba(0,0,0,.35);
   cursor: pointer;
-  transform: translateY(40px) scale(.9);
-  animation: aparecerSobre 1.5s ease forwards;
+  animation: aparecerSobre 1.6s ease forwards;
 }
 
 @keyframes aparecerSobre {
-  to {
-    transform: translateY(0) scale(1);
-  }
+  from { transform: translateY(50px) scale(.9); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
 }
 
 /* ===== SOLAPA ===== */
@@ -68,28 +64,33 @@ body {
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transform: translateY(60px) scale(.85);
-  filter: blur(8px);
+  transform: translateY(70px) scale(.8);
+  filter: blur(10px);
   z-index: 3;
 }
 
 .sobre.abierto .carta {
-  animation: salidaCarta 1.4s cubic-bezier(.22,.8,.22,1) forwards;
+  animation: salidaCarta 1.8s cubic-bezier(.22,.8,.22,1) forwards;
+  opacity: 1;
+  filter: blur(0);
 }
 
+/* 🔥 ANIMACIÓN ESTABLE */
 @keyframes salidaCarta {
   0% {
     opacity: 0;
-    transform: translateY(60px) scale(.85);
-    filter: blur(8px);
+    transform: translateY(70px) scale(.8);
+    filter: blur(10px);
   }
-  60% {
+  70% {
     opacity: 1;
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-10px) scale(1.03);
     filter: blur(0);
   }
   100% {
-    transform: translateY(10px) scale(1);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
@@ -119,7 +120,7 @@ h1 {
 p {
   font-size: 15px;
   color: #555;
-  min-height: 48px;
+  min-height: 52px;
 }
 
 /* ===== BOTÓN ===== */
@@ -157,7 +158,7 @@ button {
 
 @keyframes zoomMensaje {
   from { transform: scale(.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  to   { transform: scale(1); opacity: 1; }
 }
 
 /* ===== FLOTANTES ===== */
@@ -177,10 +178,7 @@ button {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
-  .sobre {
-    width: 290px;
-    height: 195px;
-  }
+  .sobre { width: 290px; height: 195px; }
   .solapa {
     border-left: 145px solid transparent;
     border-right: 145px solid transparent;
@@ -208,8 +206,11 @@ button {
 <script>
 let texto = "Desde el primer momento supe que eras especial para mí...";
 let i = 0;
+let iniciado = false;
 
 function abrirSobre() {
+  if (iniciado) return;
+  iniciado = true;
   document.querySelector(".sobre").classList.add("abierto");
   escribirTexto();
 }
@@ -260,3 +261,4 @@ setInterval(() => {
 
 </body>
 </html>
+
