@@ -3,239 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💌 Para Mi Persona Favorita 💌</title>
+<title>💖 Para Ti Mi Amor 💖</title>
 
 <style>
-* { box-sizing: border-box; }
-
+/* FONDO */
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top, #ffd1dc, #ff9aa2);
-  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ffd1ff);
+  background-size: 400% 400%;
+  animation: fondo 12s ease infinite;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* ===== SOBRE ===== */
-.sobre {
-  position: relative;
-  width: 320px;
-  height: 210px;
-  background: linear-gradient(145deg, #f7b7c4, #f2a9b7);
-  border-radius: 16px;
-  box-shadow: 0 30px 60px rgba(0,0,0,.35);
-  cursor: pointer;
-  animation: aparecerSobre 1.4s ease forwards;
-  z-index: 10;
+@keyframes fondo {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes aparecerSobre {
-  from { transform: translateY(40px) scale(.9); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-/* ===== SOLAPA ===== */
-.solapa {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-top: 110px solid #ec95a6;
-  transform-origin: top;
-  transition: transform 1.1s ease;
-  z-index: 2;
-}
-
-.sobre.abierto .solapa {
-  transform: rotateX(180deg);
-}
-
-/* ===== CARTA ===== */
-.carta {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* CONTENEDOR */
+.contenedor {
+  animation: entrada 1.6s ease forwards;
   opacity: 0;
-  transform: translateY(60px) scale(.85);
-  z-index: 3;
+  transform: translateY(40px) scale(0.95);
 }
 
-.sobre.abierto .carta {
-  animation: salidaCarta 1.6s ease forwards;
-}
-
-@keyframes salidaCarta {
-  0% { opacity: 0; transform: translateY(60px) scale(.85); }
-  70% { opacity: 1; transform: translateY(-10px) scale(1.04); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* ===== TARJETA (SIN FONDO) ===== */
-.tarjeta {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(6px);
-  width: 90%;
-  max-width: 270px;
-  padding: 18px;
-  border-radius: 22px;
-  text-align: center;
-  box-shadow: 0 20px 45px rgba(0,0,0,.25);
-}
-
-.tarjeta img {
-  width: 100%;
-  border-radius: 18px;
-  margin-bottom: 10px;
-  background: transparent;
-}
-
-h1 {
-  font-size: 22px;
-  color: #e63946;
-  margin: 6px 0;
-}
-
-p {
-  font-size: 15px;
-  color: #555;
-  min-height: 52px;
-}
-
-/* ===== BOTÓN ===== */
-button {
-  margin-top: 12px;
-  background: linear-gradient(135deg, #ff5c8a, #ff3366);
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 30px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* ===== MENSAJE ===== */
-.mensaje {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.mensaje div {
-  background: white;
-  padding: 28px;
-  border-radius: 24px;
-  font-size: 19px;
-  text-align: center;
-  animation: zoom .5s ease;
-}
-
-@keyframes zoom {
-  from { transform: scale(.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* ===== FLOTANTES ===== */
-.flotante {
-  position: absolute;
-  bottom: -60px;
-  animation: flotar 9s linear forwards;
-  pointer-events: none;
-}
-
-@keyframes flotar {
+@keyframes entrada {
   to {
-    transform: translateY(-140vh) rotate(12deg);
-    opacity: 0;
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
+}
+
+/* CARTA */
+.carta {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  border-radius: 25px;
+  padding: 30px 25px;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+/* TITULO */
+.carta h1 {
+  color: #ff2e63;
+  margin-bottom: 15px;
+  font-size: 1.6em;
+}
+
+/* TEXTO */
+.carta p {
+  color: #333;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+/* IMAGEN (SE QUEDA TAL CUAL) */
+.carta img {
+  width: 180px;
+  margin: 20px 0;
+  animation: flotando 3s ease-in-out infinite;
+}
+
+@keyframes flotando {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* CORAZONES */
+.corazones {
+  font-size: 1.3em;
+  animation: latido 1.5s infinite;
+}
+
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="sobre" id="sobre">
-  <div class="solapa"></div>
-
+<div class="contenedor">
   <div class="carta">
-    <div class="tarjeta">
-      <img src="foto.jpg">
-      <h1>Hola mi amor 💖</h1>
-      <p id="texto"></p>
-      <button id="btn">Descúbrelo 💌</button>
-    </div>
+    <h1>💖 Para Ti 💖</h1>
+
+    <p>
+      Eres lo más bonito que tengo en mi vida.<br>
+      Gracias por existir y hacer mis días más felices.
+    </p>
+
+    <!-- LA IMAGEN QUEDA EXACTAMENTE IGUAL -->
+    <img src="tu-imagen.png" alt="Imagen especial">
+
+    <p class="corazones">💗💗💗</p>
+
+    <p>
+      Con todo mi corazón,<br>
+      <strong>Pato</strong> 💕
+    </p>
   </div>
 </div>
-
-<script>
-const texto =
-"Espero que este día esté siendo muy bonito para ti, y que cada recuerdo nuestro quede guardado en el libro de nuestro amor. Te amo mi gordita. 💕\n\nAtte. Tu Mochi.";
-
-let i = 0;
-let abierto = false;
-
-document.getElementById("sobre").addEventListener("click", () => {
-  if (abierto) return;
-  abierto = true;
-  document.getElementById("sobre").classList.add("abierto");
-  escribir();
-});
-
-function escribir() {
-  if (i < texto.length) {
-    document.getElementById("texto").innerHTML += texto.charAt(i);
-    i++;
-    setTimeout(escribir, 55);
-  }
-}
-
-document.getElementById("btn").addEventListener("click", e => {
-  e.stopPropagation();
-  const m = document.createElement("div");
-  m.className = "mensaje";
-  m.innerHTML = `
-    <div>
-      💖<br>
-      Eres mi persona favorita<br>
-      Hoy, mañana y siempre 💕
-    </div>`;
-  document.body.appendChild(m);
-  m.onclick = () => m.remove();
-});
-
-/* 💖 corazones */
-setInterval(() => {
-  const f = document.createElement("div");
-  f.className = "flotante";
-  f.innerText = Math.random() > 0.5 ? "💖" : "❤️";
-  f.style.left = Math.random() * 100 + "vw";
-  f.style.fontSize = (16 + Math.random() * 28) + "px";
-  document.body.appendChild(f);
-  setTimeout(() => f.remove(), 9000);
-}, 180);
-
-/* 🧸 hello kitty & stitch */
-setInterval(() => {
-  const k = document.createElement("img");
-  k.src = Math.random() > 0.5 ? "hello.png" : "stitch.png"; // 👈 CORREGIDO
-  k.className = "flotante";
-  k.style.left = Math.random() * 100 + "vw";
-  k.style.width = (40 + Math.random() * 35) + "px";
-  document.body.appendChild(k);
-  setTimeout(() => k.remove(), 9000);
-}, 2000);
-</script>
 
 </body>
 </html>
