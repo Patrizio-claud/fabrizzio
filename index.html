@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💌 Para Mi Persona Favorita 💌</title>
+<title>💌 Una Carta Para Ti 💌</title>
 
 <style>
-/* ===== RESET ===== */
 * { box-sizing: border-box; }
 
 body {
@@ -29,6 +28,8 @@ body {
   border-radius: 16px;
   box-shadow: 0 30px 60px rgba(0,0,0,.35);
   cursor: pointer;
+  z-index: 10;
+  pointer-events: auto;
   animation: aparecerSobre 1.6s ease forwards;
 }
 
@@ -50,6 +51,7 @@ body {
   transform-origin: top;
   transition: transform 1.2s ease;
   z-index: 2;
+  pointer-events: none;
 }
 
 .sobre.abierto .solapa {
@@ -67,15 +69,14 @@ body {
   transform: translateY(70px) scale(.8);
   filter: blur(10px);
   z-index: 3;
+  pointer-events: none;
 }
 
 .sobre.abierto .carta {
   animation: salidaCarta 1.8s cubic-bezier(.22,.8,.22,1) forwards;
-  opacity: 1;
-  filter: blur(0);
 }
 
-/* 🔥 ANIMACIÓN ESTABLE */
+/* ANIMACIÓN ESTABLE */
 @keyframes salidaCarta {
   0% {
     opacity: 0;
@@ -133,7 +134,6 @@ button {
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,.25);
 }
 
 /* ===== MENSAJE FINAL ===== */
@@ -153,12 +153,6 @@ button {
   border-radius: 24px;
   font-size: 19px;
   text-align: center;
-  animation: zoomMensaje .6s ease;
-}
-
-@keyframes zoomMensaje {
-  from { transform: scale(.7); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
 }
 
 /* ===== FLOTANTES ===== */
@@ -171,7 +165,7 @@ button {
 
 @keyframes flotar {
   to {
-    transform: translateY(-140vh) rotate(25deg);
+    transform: translateY(-140vh) rotate(12deg);
     opacity: 0;
   }
 }
@@ -190,7 +184,7 @@ button {
 
 <body>
 
-<div class="sobre" onclick="abrirSobre()">
+<div class="sobre" id="sobre">
   <div class="solapa"></div>
 
   <div class="carta">
@@ -204,17 +198,18 @@ button {
 </div>
 
 <script>
-let texto = "Espero que este día esté siendo muy bonito para ti, en el que las fotos y los momentos compartidos irán al libro de nuestro eterno amor. Te amo mi gordita. 
-Atte. Tu Mochi.";
+let texto = "Desde el primer momento supe que eras especial para mí...";
 let i = 0;
 let iniciado = false;
 
-function abrirSobre() {
+const sobre = document.getElementById("sobre");
+
+sobre.addEventListener("click", () => {
   if (iniciado) return;
   iniciado = true;
-  document.querySelector(".sobre").classList.add("abierto");
+  sobre.classList.add("abierto");
   escribirTexto();
-}
+});
 
 function escribirTexto() {
   if (i < texto.length) {
@@ -238,7 +233,7 @@ function mostrarMensaje(e) {
   m.onclick = () => m.remove();
 }
 
-/* ===== FLOTANTES ===== */
+/* CORAZONES */
 setInterval(() => {
   const f = document.createElement("div");
   f.className = "flotante";
@@ -249,6 +244,7 @@ setInterval(() => {
   setTimeout(() => f.remove(), 9000);
 }, 160);
 
+/* HELLO KITTY + STITCH */
 setInterval(() => {
   const k = document.createElement("img");
   k.src = Math.random() > 0.5 ? "hello.png" : "stitch.png";
@@ -262,5 +258,3 @@ setInterval(() => {
 
 </body>
 </html>
-
-
